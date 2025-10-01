@@ -30,7 +30,7 @@ WORKDIR /app/ui.resources
 RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
     npm config set fetch-retries 5 && \
-    npm install && \
+    npm install --legacy-peer-deps && \
     npm run build
 
 # Go back to app directory and build the Java application

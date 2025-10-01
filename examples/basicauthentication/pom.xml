@@ -193,10 +193,10 @@
         </configuration>
         <executions>
           <execution>
-            <id>exec-yarn-install</id>
+            <id>exec-npm-install</id>
             <phase>generate-sources</phase>
             <configuration>
-              <executable>yarn</executable>
+              <executable>npm</executable>
               <arguments>
                 <argument>install</argument>
               </arguments>
@@ -209,8 +209,9 @@
             <id>exec-ngcli-build</id>
             <phase>generate-sources</phase>
             <configuration>
-              <executable>ng</executable>
+              <executable>npx</executable>
               <arguments>
+                <argument>ng</argument>
                 <argument>build</argument>
                 <argument>--base-href=#context-path#</argument>
               </arguments>

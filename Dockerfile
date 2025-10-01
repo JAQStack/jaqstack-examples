@@ -1,4 +1,4 @@
-# Use Node.js 18 as base image, then add Java
+        # Use Node.js 18 as base image, then add Java
 FROM node:18-slim
 
 # Set working directory
@@ -25,7 +25,13 @@ COPY examples/basicauthentication/ui.resources /app/ui.resources
 
 # Build the Angular frontend first
 WORKDIR /app/ui.resources
-RUN yarn install && yarn build
+# Use npm instead of yarn for better Docker reliability
+# Add network timeout and retry configurations
+RUN npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm config set fetch-retries 5 && \
+    npm install && \
+    npm run build
 
 # Go back to app directory and build the Java application
 WORKDIR /app

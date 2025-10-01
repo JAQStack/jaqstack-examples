@@ -8,12 +8,15 @@
   <name>JAQ Stack Basic Authetication Example</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <node.version>v8.9.4</node.version>
-    <yarn.version>v1.3.2</yarn.version>
+    <node.version>v22.15.0</node.version>
+    <yarn.version>v1.22.22</yarn.version>
     <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
     <environment>dev</environment>
-    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-    <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+    <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
+    <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
@@ -21,140 +24,140 @@
   </properties>
 
    <dependencies>
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <!-- JUnit 5 for modern testing -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.0</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Jakarta Servlet API -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
-     <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+     <!-- MongoDB Java Driver -->
      <dependency>
        <groupId>org.mongodb</groupId>
-       <artifactId>mongo-java-driver</artifactId>
-       <version>3.9.1</version>
+       <artifactId>mongodb-driver-sync</artifactId>
+       <version>4.10.2</version>
      </dependency>
-     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+     <!-- Gson for JSON processing -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.8.5</version>
+      <version>2.10.1</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+    <!-- Jakarta RESTful Web Services API -->
     <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-      <version>2.1</version>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <version>3.1.0</version>
     </dependency>
-     <!-- Jersey -->
+     <!-- Jersey 3.x with Jakarta EE -->
      <dependency>
        <groupId>org.glassfish.jersey.containers</groupId>
        <artifactId>jersey-container-servlet</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.containers</groupId>
        <artifactId>jersey-container-servlet-core</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.core</groupId>
        <artifactId>jersey-server</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.inject</groupId>
        <artifactId>jersey-hk2</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.media</groupId>
        <artifactId>jersey-media-json-jackson</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.media</groupId>
        <artifactId>jersey-media-moxy</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
      </dependency>
      <dependency>
        <groupId>org.glassfish.jersey.connectors</groupId>
        <artifactId>jersey-apache-connector</artifactId>
-       <version>2.26</version>
+       <version>${jersey.version}</version>
        <scope>test</scope>
      </dependency>
      <!-- Java JWT -->
      <dependency>
        <groupId>io.jsonwebtoken</groupId>
        <artifactId>jjwt-api</artifactId>
-       <version>0.10.5</version>
+       <version>0.12.3</version>
      </dependency>
      <dependency>
        <groupId>io.jsonwebtoken</groupId>
        <artifactId>jjwt-impl</artifactId>
-       <version>0.10.5</version>
+       <version>0.12.3</version>
        <scope>runtime</scope>
      </dependency>
      <dependency>
        <groupId>io.jsonwebtoken</groupId>
        <artifactId>jjwt-jackson</artifactId>
-       <version>0.10.5</version>
+       <version>0.12.3</version>
        <scope>runtime</scope>
      </dependency>
-    <!-- For CDI to work -->
+    <!-- Jakarta EE CDI -->
     <dependency>
-       <groupId>javax</groupId>
-       <artifactId>javaee-api</artifactId>
-       <version>8.0</version>
-       <scope>provided</scope>
+       <groupId>jakarta.enterprise</groupId>
+       <artifactId>jakarta.enterprise.cdi-api</artifactId>
+       <version>4.0.1</version>
     </dependency>
     <dependency>
-       <groupId>javax</groupId>
-       <artifactId>javaee-web-api</artifactId>
-       <version>8.0</version>
-       <scope>provided</scope>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>2.1.1</version>
     </dependency>
     <dependency>
-       <groupId>javax.enterprise</groupId>
-       <artifactId>cdi-api</artifactId>
-       <version>2.0.SP1</version>
-       <scope>provided</scope>
+      <groupId>org.glassfish.jersey.ext.cdi</groupId>
+      <artifactId>jersey-cdi1x</artifactId>
+      <version>${jersey.version}</version>
     </dependency>
     <dependency>
-       <groupId>org.glassfish.jersey.ext.cdi</groupId>
-       <artifactId>jersey-cdi1x</artifactId>
-       <version>2.26</version>
-    </dependency>
-    <dependency>
-       <groupId>org.jboss.weld.servlet</groupId>
-       <artifactId>weld-servlet-shaded</artifactId>
-       <version>3.0.5.Final</version>
+      <groupId>org.jboss.weld.servlet</groupId>
+      <artifactId>weld-servlet-shaded</artifactId>
+      <version>5.1.0.Final</version>
     </dependency>
    </dependencies>
   <build>
     <finalName>basicauth</finalName>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-         <version>3.8.0</version>
-          <configuration>
-            <source>${java.version}</source>
-            <target>${java.version}</target>
-            <excludes>
-              <exclude>ngapp/**</exclude>
-            </excludes>
-          </configuration>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <excludes>
+            <exclude>ngapp/**</exclude>
+          </excludes>
+        </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-clean-plugin.version}</version>
         <configuration>
           <failOnError>false</failOnError>
           <filesets>
@@ -167,6 +170,17 @@
               <followSymlinks>false</followSymlinks>
             </fileset>
           </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+          </includes>
         </configuration>
       </plugin>
       <plugin>
@@ -223,7 +237,7 @@
             </goals>
             <configuration>
               <overwrite>true</overwrite>
-              <outputDirectory>${basedir}/target/jaq-stack-webapp/resources/</outputDirectory>
+              <outputDirectory>${basedir}/target/basicauth/</outputDirectory>
               <resources>
                 <resource>
                   <directory>ui.resources/dist</directory>

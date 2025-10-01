@@ -7,7 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import com.mongodb.MongoException;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -21,7 +21,7 @@ import com.jaqstack.models.User;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Service which provides crud operations for database.
@@ -71,10 +71,10 @@ public class DataService implements Serializable {
 
         MongoCollection<Document> collection = database.getCollection("users");
 
-        BasicDBObject andQuery = new BasicDBObject();
-        List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
-        obj.add(new BasicDBObject("username", userCredentials.getUsername()));
-        obj.add(new BasicDBObject("password", userCredentials.getPassword()));
+        Document andQuery = new Document();
+        List<Document> obj = new ArrayList<Document>();
+        obj.add(new Document("username", userCredentials.getUsername()));
+        obj.add(new Document("password", userCredentials.getPassword()));
         andQuery.put("$and", obj);
 
         //System.out.println("**Query="+ andQuery.toString());

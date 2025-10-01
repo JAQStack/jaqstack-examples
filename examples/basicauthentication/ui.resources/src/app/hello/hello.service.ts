@@ -1,26 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import {environment} from '../../environments/environment';
-
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HelloService {
 
-  serverUrl : string = environment.BACKEND_URL + "/service/dbservice/product";
+  serverUrl: string = environment.BACKEND_URL + '/service/auth/users';
 
   constructor(private http: HttpClient) { }
 
-  getHelloWorldFromService() : string {
-      return "hello world from the service";
+  getHelloWorldFromService(): string {
+    return 'hello world from the service';
   }
 
-  getHelloWorldFromJava() {
+  getHelloWorldFromJava(): Observable<any> {
     return this.http.get(this.serverUrl);
   }
 
+  // New method to get users from the API
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.serverUrl);
+  }
+
+  // Method to register a new user
+  registerUser(user: any): Observable<any> {
+    const registerUrl = environment.BACKEND_URL + '/service/auth/register';
+    return this.http.post(registerUrl, user);
+  }
 }

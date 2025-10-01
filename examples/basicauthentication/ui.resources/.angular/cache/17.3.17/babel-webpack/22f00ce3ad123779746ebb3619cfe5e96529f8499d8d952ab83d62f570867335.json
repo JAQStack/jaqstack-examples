@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: false,\n  BACKEND_URL: window.location.protocol + '//' + window.location.hostname + ':' + 8080 + '/basicauth'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

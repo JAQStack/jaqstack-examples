@@ -3,10 +3,11 @@ package com.jaqstack.service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.Claims;
 
 import java.io.Serializable;
 import java.security.Key;
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 /**
  * Service which provides operations for authentication tokens.
  *

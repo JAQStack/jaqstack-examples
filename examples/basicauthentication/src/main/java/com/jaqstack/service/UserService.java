@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import com.jaqstack.models.UserCredentials;
 import com.jaqstack.service.DataService;
-import javax.inject.Inject;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
 
 /**

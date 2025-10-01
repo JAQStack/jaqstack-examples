@@ -1,7 +1,41 @@
   <div>
-  Message from the server :
+    <h3>Message from the server:</h3>
+    <div>{{helloFromJava}}</div>
   </div>
-  <div>
-      {{helloFromJava}}
+
+  <div style="margin-top: 20px;">
+    <h3>Users from Database:</h3>
+    
+    <div *ngIf="loading" style="color: blue;">
+      Loading users...
+    </div>
+    
+    <div *ngIf="error" style="color: red;">
+      {{error}}
+    </div>
+    
+    <div *ngIf="!loading && !error">
+      <div *ngIf="users.length === 0" style="color: gray;">
+        No users found in database.
+      </div>
+      
+      <div *ngIf="users.length > 0">
+        <p><strong>Total users: {{users.length}}</strong></p>
+        <div *ngFor="let user of users" style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 5px;">
+          <p><strong>Username:</strong> {{user.username}}</p>
+          <p><strong>Password:</strong> {{user.password}}</p>
+          <p><strong>First Name:</strong> {{user.firstName || 'N/A'}}</p>
+          <p><strong>Last Name:</strong> {{user.lastName || 'N/A'}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <button (click)="addTestUser()" style="margin-top: 10px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Add Test User
+    </button>
+    
+    <button (click)="loadUsers()" style="margin-top: 10px; margin-left: 10px; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Refresh Users
+    </button>
   </div>
 

@@ -9,7 +9,7 @@ export class Component2Component implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

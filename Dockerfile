@@ -17,6 +17,9 @@ COPY examples/basicauthentication/pom.xml /app/pom.xml
 COPY examples/basicauthentication/src /app/src
 COPY examples/basicauthentication/ui.resources /app/ui.resources
 
+# Remove old lock files to avoid npm warnings
+RUN rm -f /app/ui.resources/package-lock.json /app/ui.resources/yarn.lock
+
 # Build the Java application (skip frontend build for now)
 RUN mvn clean package -DskipTests
 

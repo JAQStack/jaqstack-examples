@@ -1,5 +1,5 @@
 # Use a pre-built Java application approach
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre
 
 # Set working directory
 WORKDIR /app

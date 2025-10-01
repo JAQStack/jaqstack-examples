@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install Java 11 JDK and Maven
 RUN apt-get update && \
-    apt-get install -y openjdk-11-jdk maven && \
+    apt-get install -y openjdk-11-jdk-headless maven && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

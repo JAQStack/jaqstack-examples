@@ -8,12 +8,12 @@ exports = module.exports = function historyApiFallback(options) {
 
   return function(req, res, next) {
     var headers = req.headers;
-    if (req.method !== 'GET') {
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
       logger(
         'Not rewriting',
         req.method,
         req.url,
-        'because the method is not GET.'
+        'because the method is not GET or HEAD.'
       );
       return next();
     } else if (!headers || typeof headers.accept !== 'string') {
@@ -50,6 +50,17 @@ exports = module.exports = function historyApiFallback(options) {
       var match = parsedUrl.pathname.match(rewrite.from);
       if (match !== null) {
         rewriteTarget = evaluateRewriteRule(parsedUrl, match, rewrite.to, req);
+
+        if(rewriteTarget.charAt(0) !== '/') {
+          logger(
+            'We recommend using an absolute path for the rewrite target.',
+            'Received a non-absolute rewrite target',
+            rewriteTarget,
+            'for URL',
+            req.url
+          );
+        }
+
         logger('Rewriting', req.method, req.url, 'to', rewriteTarget);
         req.url = rewriteTarget;
         return next();
@@ -79,7 +90,7 @@ function evaluateRewriteRule(parsedUrl, match, rule, req) {
   if (typeof rule === 'string') {
     return rule;
   } else if (typeof rule !== 'function') {
-    throw new Error('Rewrite rule can only be of type string of function.');
+    throw new Error('Rewrite rule can only be of type string or function.');
   }
 
   return rule({
@@ -103,6 +114,7 @@ function getLogger(options) {
   if (options && options.logger) {
     return options.logger;
   } else if (options && options.verbose) {
+    // eslint-disable-next-line no-console
     return console.log.bind(console);
   }
   return function(){};

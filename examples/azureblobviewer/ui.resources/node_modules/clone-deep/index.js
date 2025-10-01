@@ -4,14 +4,9 @@
  * Module dependenices
  */
 
-var isObject = require('is-plain-object');
-var clone = require('shallow-clone');
-var typeOf = require('kind-of');
-var forOwn = require('for-own');
-
-/**
- * Recursively clone native types.
- */
+const clone = require('shallow-clone');
+const typeOf = require('kind-of');
+const isPlainObject = require('is-plain-object');
 
 function cloneDeep(val, instanceClone) {
   switch (typeOf(val)) {
@@ -25,25 +20,24 @@ function cloneDeep(val, instanceClone) {
   }
 }
 
-function cloneObjectDeep(obj, instanceClone) {
-  if (isObject(obj)) {
-    var res = {};
-    forOwn(obj, function(obj, key) {
-      this[key] = cloneDeep(obj, instanceClone);
-    }, res);
-    return res;
-  } else if (instanceClone) {
-    return instanceClone(obj);
-  } else {
-    return obj;
+function cloneObjectDeep(val, instanceClone) {
+  if (typeof instanceClone === 'function') {
+    return instanceClone(val);
   }
+  if (instanceClone || isPlainObject(val)) {
+    const res = new val.constructor();
+    for (let key in val) {
+      res[key] = cloneDeep(val[key], instanceClone);
+    }
+    return res;
+  }
+  return val;
 }
 
-function cloneArrayDeep(arr, instanceClone) {
-  var len = arr.length, res = [];
-  var i = -1;
-  while (++i < len) {
-    res[i] = cloneDeep(arr[i], instanceClone);
+function cloneArrayDeep(val, instanceClone) {
+  const res = new val.constructor(val.length);
+  for (let i = 0; i < val.length; i++) {
+    res[i] = cloneDeep(val[i], instanceClone);
   }
   return res;
 }

@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Azureblob } from '../models/azureblob';
 import {environment} from "../../environments/environment";
 
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AzureblobService {

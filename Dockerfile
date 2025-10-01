@@ -11,7 +11,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Angular CLI globally (Yarn is already available in Node.js image)
-RUN npm install -g --unsafe-perm @angular/cli@latest
+# Use Angular CLI 17 to match the project's Angular version
+RUN npm install -g --unsafe-perm @angular/cli@17
 
 # Copy Maven files first for better caching
 COPY examples/basicauthentication/pom.xml /app/pom.xml

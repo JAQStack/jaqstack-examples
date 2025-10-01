@@ -26,6 +26,8 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+**/package-lock.json
+**/yarn.lock
 
 # Build artifacts
 target/

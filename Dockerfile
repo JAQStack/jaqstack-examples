@@ -4,9 +4,12 @@ FROM openjdk:11-jre-slim
 # Set working directory
 WORKDIR /app
 
-# Install Maven
+# Install Maven, Node.js, and Yarn
 RUN apt-get update && \
-    apt-get install -y maven && \
+    apt-get install -y maven curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g yarn && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -19,7 +22,12 @@ COPY examples/basicauthentication/src /app/src
 # Copy UI resources
 COPY examples/basicauthentication/ui.resources /app/ui.resources
 
-# Build the application
+# Build the Angular frontend first
+WORKDIR /app/ui.resources
+RUN yarn install && yarn build
+
+# Go back to app directory and build the Java application
+WORKDIR /app
 RUN mvn clean package -DskipTests
 
 # Expose port 8080

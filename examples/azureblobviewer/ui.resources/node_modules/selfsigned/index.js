@@ -23,6 +23,20 @@ function getAlgorithm(key) {
   }
 }
 
+/**
+ *
+ * @param {forge.pki.CertificateField[]} attrs Attributes used for subject and issuer.
+ * @param {object} options
+ * @param {number} [options.days=365] the number of days before expiration
+ * @param {number} [options.keySize=1024] the size for the private key in bits
+ * @param {object} [options.extensions] additional extensions for the certificate
+ * @param {string} [options.algorithm="sha1"] The signature algorithm sha256 or sha1
+ * @param {boolean} [options.pkcs7=false] include PKCS#7 as part of the output
+ * @param {boolean} [options.clientCertificate=false] generate client cert signed by the original key
+ * @param {string} [options.clientCertificateCN="John Doe jdoe123"] client certificate's common name
+ * @param {function} [done] Optional callback, if not provided the generation is synchronous
+ * @returns
+ */
 exports.generate = function generate(attrs, options, done) {
   if (typeof attrs === 'function') {
     done = attrs;
@@ -39,9 +53,11 @@ exports.generate = function generate(attrs, options, done) {
 
     cert.serialNumber = toPositiveHex(forge.util.bytesToHex(forge.random.getBytesSync(9))); // the serial number can be decimal or hex (if preceded by 0x)
 
-    cert.validity.notBefore = new Date();
-    cert.validity.notAfter = new Date();
-    cert.validity.notAfter.setDate(cert.validity.notBefore.getDate() + (options.days || 365));
+    cert.validity.notBefore = options.notBeforeDate || new Date();
+
+    var notAfter = new Date();
+    cert.validity.notAfter = notAfter;
+    cert.validity.notAfter.setDate(notAfter.getDate() + (options.days || 365));
 
     attrs = attrs || [{
       name: 'commonName',
@@ -110,7 +126,7 @@ exports.generate = function generate(attrs, options, done) {
     }
 
     if (options && options.clientCertificate) {
-      var clientkeys = forge.pki.rsa.generateKeyPair(1024);
+      var clientkeys = forge.pki.rsa.generateKeyPair(options.clientCertificateKeySize || 1024);
       var clientcert = forge.pki.createCertificate();
       clientcert.serialNumber = toPositiveHex(forge.util.bytesToHex(forge.random.getBytesSync(9)));
       clientcert.validity.notBefore = new Date();
@@ -177,7 +193,7 @@ exports.generate = function generate(attrs, options, done) {
       try {
         return done(null, generatePem(keyPair));
       } catch (ex) {
-        return done(err);
+        return done(ex);
       }
     });
   }

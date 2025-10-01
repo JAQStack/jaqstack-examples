@@ -1,3 +1,58 @@
+1.8.1 / 2025-07-17
+==========
+
+  * deps: on-headers@~1.1.0
+    - Fix [CVE-2025-7339](https://www.cve.org/CVERecord?id=CVE-2025-7339) ([GHSA-76c9-3jph-rj3q](https://github.com/expressjs/on-headers/security/advisories/GHSA-76c9-3jph-rj3q))
+
+1.8.0 / 2025-02-10
+==================
+
+  * Use `res.headersSent` when available
+  * Replace `_implicitHeader` with `writeHead` property
+  * add brotli support for versions of node that support it
+  * Add the enforceEncoding option for requests without `Accept-Encoding` header
+
+1.7.5 / 2024-10-31
+==================
+
+  * deps: Replace accepts with negotiator@~0.6.4
+    - Add preference option
+  * deps: bytes@3.1.2
+    - Add petabyte (`pb`) support
+    - Fix "thousandsSeparator" incorrecting formatting fractional part
+    - Fix return value for un-parsable strings
+  * deps: compressible@~2.0.18
+    - Mark `font/ttf` as compressible
+    - Remove compressible from `multipart/mixed`
+    - deps: mime-db@'>= 1.43.0 < 2'
+  * deps: safe-buffer@5.2.1
+
+1.7.4 / 2019-03-18
+==================
+
+  * deps: compressible@~2.0.16
+    - Mark `text/less` as compressible
+    - deps: mime-db@'>= 1.38.0 < 2'
+  * deps: on-headers@~1.0.2
+    - Fix `res.writeHead` patch missing return value
+  * perf: prevent unnecessary buffer copy
+
+1.7.3 / 2018-07-15
+==================
+
+  * deps: accepts@~1.3.5
+    - deps: mime-types@~2.1.18
+  * deps: compressible@~2.0.14
+    - Mark all XML-derived types as compressible
+    - deps: mime-db@'>= 1.34.0 < 2'
+  * deps: safe-buffer@5.1.2
+
+1.7.2 / 2018-02-18
+==================
+
+  * deps: compressible@~2.0.13
+    - deps: mime-db@'>= 1.33.0 < 2'
+
 1.7.1 / 2017-09-26
 ==================
 

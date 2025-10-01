@@ -3,13 +3,13 @@ package com.jaqstack.servlet;
 import com.jaqstack.azure.impl.AzureBlobFetchImpl;
 import com.jaqstack.azure.models.AzureBlobStorage;
 
-import javax.servlet.ServletException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.servlet.ServletException;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/blobservice/azure")
 @Consumes(MediaType.APPLICATION_JSON)

@@ -56,7 +56,7 @@ export class AzureBlobViewerComponent implements OnInit {
     console.log("Call createImageFromBlob()", image);
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      this.imageBlobUrl = reader.result;
+      this.imageBlobUrl = reader.result as string;
     }, false);
 
     if (image) {

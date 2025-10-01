@@ -1,4 +1,4 @@
-# Use a pre-built Java application approach
+# Build only the basicauthentication example
 FROM eclipse-temurin:17-jre
 
 # Set working directory
@@ -10,8 +10,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the entire basicauthentication example
-COPY examples/basicauthentication/ /app/
+# Copy only the basicauthentication example files
+COPY examples/basicauthentication/pom.xml /app/pom.xml
+COPY examples/basicauthentication/src /app/src
+COPY examples/basicauthentication/ui.resources /app/ui.resources
 
 # Build the Java application (skip frontend build for now)
 RUN mvn clean package -DskipTests

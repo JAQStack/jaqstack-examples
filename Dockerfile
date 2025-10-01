@@ -1,17 +1,17 @@
-# Use OpenJDK 11 JDK as base image (needed for compilation)
-FROM openjdk:11-jdk-slim
+# Use Node.js 18 as base image, then add Java
+FROM node:18-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install Maven, Node.js, and Yarn
+# Install Java 11 JDK and Maven
 RUN apt-get update && \
-    apt-get install -y maven curl && \
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g yarn @angular/cli && \
+    apt-get install -y openjdk-11-jdk maven && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Install Yarn and Angular CLI globally
+RUN npm install -g yarn @angular/cli
 
 # Copy Maven files first for better caching
 COPY examples/basicauthentication/pom.xml /app/pom.xml

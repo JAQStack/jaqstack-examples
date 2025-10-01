@@ -10,9 +10,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Yarn and Angular CLI globally
-RUN npm install -g --unsafe-perm yarn@latest && \
-    npm install -g --unsafe-perm @angular/cli@latest
+# Install Angular CLI globally (Yarn is already available in Node.js image)
+RUN npm install -g --unsafe-perm @angular/cli@latest
 
 # Copy Maven files first for better caching
 COPY examples/basicauthentication/pom.xml /app/pom.xml

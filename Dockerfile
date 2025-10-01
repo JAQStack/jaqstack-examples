@@ -1,5 +1,5 @@
-# Use OpenJDK 11 as base image
-FROM openjdk:11-jre-slim
+# Use OpenJDK 11 JDK as base image (needed for compilation)
+FROM openjdk:11-jdk-slim
 
 # Set working directory
 WORKDIR /app

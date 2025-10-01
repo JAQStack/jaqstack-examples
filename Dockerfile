@@ -1,5 +1,5 @@
 # Build only the basicauthentication example
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17-jdk
 
 # Set working directory
 WORKDIR /app

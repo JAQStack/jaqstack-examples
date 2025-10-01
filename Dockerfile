@@ -4,9 +4,11 @@ FROM eclipse-temurin:17-jre
 # Set working directory
 WORKDIR /app
 
-# Install Maven for building
+# Install Maven and Node.js for building
 RUN apt-get update && \
-    apt-get install -y maven && \
+    apt-get install -y maven curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

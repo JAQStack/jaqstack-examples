@@ -1,0 +1,31 @@
+<h2>Blog Posts</h2>
+
+<h3>Create New Blog Post</h3>
+<form (ngSubmit)="createBlogPost()">
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" [(ngModel)]="newBlogPost.title" name="title" required>
+  </div>
+  <div>
+    <label for="content">Content:</label>
+    <textarea id="content" [(ngModel)]="newBlogPost.content" name="content" required></textarea>
+  </div>
+  <div>
+    <label for="author">Author:</label>
+    <input id="author" [(ngModel)]="newBlogPost.author" name="author" required>
+  </div>
+  <button type="submit">Add Post</button>
+</form>
+
+<div *ngIf="blogPosts.length > 0">
+  <h3>All Posts</h3>
+  <ul>
+    <li *ngFor="let post of blogPosts">
+      <a [routerLink]="['/blog', post.id]">{{post.title}}</a> by {{post.author}}
+    </li>
+  </ul>
+</div>
+<div *ngIf="blogPosts.length === 0">
+  <p>No blog posts found. Create one!</p>
+</div>
+

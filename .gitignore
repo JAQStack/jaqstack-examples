@@ -6,5 +6,9 @@
 *.idea
 
 # Node modules
+node_modules/
 core/ui.resources/node_modules/
 core/target/
+
+# Angular cache
+.angular/cache/

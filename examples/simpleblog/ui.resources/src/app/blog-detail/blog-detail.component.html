@@ -1,0 +1,11 @@
+<div *ngIf="blogPost">
+  <h2>{{blogPost.title}}</h2>
+  <p><strong>Author:</strong> {{blogPost.author}}</p>
+  <p>{{blogPost.content}}</p>
+  <a routerLink="/">Back to Home</a>
+</div>
+<div *ngIf="!blogPost">
+  <p>Blog post not found.</p>
+  <a routerLink="/">Back to Home</a>
+</div>
+

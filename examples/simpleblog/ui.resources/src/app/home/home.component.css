@@ -1,0 +1,30 @@
+div {
+  margin: 10px 0;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+}
+
+input, textarea {
+  width: 300px;
+  padding: 5px;
+}
+
+textarea {
+  height: 100px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+

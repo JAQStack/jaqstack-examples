@@ -19,54 +19,22 @@ JAQ Stack is a full-stack development framework that combines:
 
 ## 🎯 Available Examples
 
-### 1. [Basic Authentication](./basicauthentication/)
-**Description**: Complete authentication system with user registration, login, and JWT token management.
-
-**Features**:
-- User registration and login
-- JWT token-based authentication
-- MongoDB integration
-- Angular frontend with authentication guards
-- RESTful API endpoints
-
-**Technologies**: Java, Angular, MongoDB, JWT, Maven
-
-**Quick Start**:
-```bash
-cd examples/basicauthentication
-mvn clean package
-mvn tomcat7:run
-```
-
-### 2. [Azure Blob Viewer](./azureblobviewer/)
-**Description**: Azure Blob Storage integration for viewing and managing cloud storage files.
-
-**Features**:
-- Azure Blob Storage integration
-- File upload and download
-- Image preview and management
-- RESTful API for blob operations
-- Angular frontend with file management
-
-**Technologies**: Java, Angular, Azure Blob Storage, Maven
-
-**Quick Start**:
-```bash
-cd examples/azureblobviewer
-mvn clean package
-mvn tomcat7:run
-```
+| Example | Description | Key Features | Technologies |
+|---------|-------------|--------------|--------------|
+| 🔐 [Basic Authentication](./basicauthentication/) | Complete authentication system with user registration, login, and JWT token management. | User registration and login, JWT token-based authentication, MongoDB integration, Angular frontend with authentication guards, RESTful API endpoints | Java, Angular, MongoDB, JWT, Maven |
+| ☁️ [Azure Blob Viewer](./azureblobviewer/) | Azure Blob Storage integration for viewing and managing cloud storage files. | Azure Blob Storage integration, File upload and download, Image preview and management, RESTful API for blob operations, Angular frontend with file management | Java, Angular, Azure Blob Storage, Maven |
+| 📝 [Simple Blog](./simpleblog/) | A simple blog application built with Java, Angular, Helidon, and MongoDB. | Create and read blog posts, RESTful API backend with Helidon MP, Modern Angular 20 frontend, MongoDB database integration, CORS support | Java 21, Helidon MP 4.3.1, Angular 20, MongoDB, Maven |
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 Before running any example, ensure you have:
 
-- **Java 11+** - [Download](https://www.oracle.com/java/technologies/downloads/)
-- **Node.js 14+** - [Download](https://nodejs.org/)
+- **Java 11+** (Java 21 recommended for Simple Blog) - [Download](https://www.oracle.com/java/technologies/downloads/)
+- **Node.js 18+** - [Download](https://nodejs.org/)
 - **Angular CLI** - `npm install -g @angular/cli`
 - **Maven 3.6+** - [Download](https://maven.apache.org/download.cgi)
-- **MongoDB** (for Basic Authentication example) - [Download](https://www.mongodb.com/try/download/community)
+- **MongoDB** (required for Basic Authentication and Simple Blog examples) - [Download](https://www.mongodb.com/try/download/community)
 
 ### Running an Example
 
@@ -85,13 +53,25 @@ Before running any example, ensure you have:
    ```
 
 4. **Build and run**
+   
+   **For Tomcat-based examples** (Basic Authentication, Azure Blob Viewer):
    ```bash
    mvn clean package
    mvn tomcat7:run
+   # Access at http://localhost:8080/[example-name]
+   ```
+   
+   **For Helidon MP examples** (Simple Blog):
+   ```bash
+   mvn clean package
+   java -jar target/simpleblog.jar
+   # Access at http://localhost:8080
    ```
 
 5. **Access the application**
-   - Open your browser to `http://localhost:8080/[example-name]`
+   - Tomcat-based examples: `http://localhost:8080/[example-name]`
+   - Helidon MP examples: `http://localhost:8080`
+   - Frontend development: `http://localhost:4200` (when running `ng serve`)
 
 ## 📁 Project Structure
 
@@ -127,7 +107,9 @@ examples/
 ### For Backend Development
 1. Make changes to Java code in `src/main/java/`
 2. Run `mvn clean package` to build
-3. Use `mvn tomcat7:run` for development server
+3. Run development server:
+   - **Tomcat-based examples**: `mvn tomcat7:run`
+   - **Helidon MP examples**: `java -jar target/[app-name].jar`
 
 ### For Frontend Development
 1. Navigate to `ui.resources/`
@@ -135,10 +117,12 @@ examples/
 3. Run `ng build --prod` for production build
 
 ### Full Stack Development
-1. Start MongoDB (if required)
-2. Run backend: `mvn tomcat7:run`
+1. Start MongoDB (if required for the example)
+2. Run backend:
+   - **Tomcat-based**: `mvn tomcat7:run`
+   - **Helidon MP**: `java -jar target/[app-name].jar`
 3. Run frontend: `cd ui.resources && ng serve`
-4. Access at `http://localhost:4200` (Angular) or `http://localhost:8080` (Java)
+4. Access at `http://localhost:4200` (Angular frontend) or `http://localhost:8080` (backend API)
 
 ## 🆘 Getting Help
 
@@ -160,7 +144,9 @@ examples/
 
 ## 🎯 Next Steps
 
-1. **Explore Examples**: Start with the Basic Authentication example
+1. **Explore Examples**: 
+   - Start with the **Basic Authentication** example for traditional Tomcat-based apps
+   - Try the **Simple Blog** example for modern Helidon MP microservices
 2. **Customize**: Modify examples to fit your needs
 3. **Build**: Create your own JAQ Stack applications
 4. **Contribute**: Share improvements and new examples

@@ -55,9 +55,12 @@ core/ui.resources/node_modules/
 
 # Angular
 .angular/
+**/.angular/
+**/.angular/**
+.angular-cli.json
+**/.angular-cli.json
 dist/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.angular/cache/

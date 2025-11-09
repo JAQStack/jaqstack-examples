@@ -6,6 +6,9 @@
 *.idea
 .idea/
 
+# VS Code files
+.vscode/
+
 # Eclipse files
 .settings/
 .project
